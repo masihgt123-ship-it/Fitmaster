@@ -9,11 +9,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Get code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+      - name: Build APK with Buildozer (fixed)
+        uses: ArtemSBulgakov/buildozer-action@v1.2
         with:
           workdir: .
           buildozer_version: stable
