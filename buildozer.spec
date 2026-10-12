@@ -2,10 +2,13 @@
 title = FitMaster Pro
 package.name = fitmaster
 package.domain = org.dinanafezi
+
 source.dir = .
-source.include_exts = py,html,webp,png,jpg
+source.include_exts = py,html,css,js,json,webp,png,jpg,jpeg,svg,ico,ttf,otf,woff,woff2
+
 version = 1.0.0
-requirements = python3,kivy
+requirements = python3,kivy,pyjnius,android
+
 orientation = portrait
 fullscreen = 0
 
