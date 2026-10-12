@@ -2,6 +2,8 @@ name: Build FitMaster APK
 
 on:
   push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -27,24 +29,10 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            build-essential \
-            git \
-            zip \
-            unzip \
-            autoconf \
-            automake \
-            libtool \
-            libltdl-dev \
-            pkg-config \
-            zlib1g-dev \
-            libncurses5-dev \
-            libncursesw5-dev \
-            libtinfo6 \
-            cmake \
-            libffi-dev \
-            libssl-dev \
-            autopoint \
-            gettext
+            build-essential git zip unzip \
+            autoconf automake libtool libltdl-dev pkg-config \
+            zlib1g-dev libncurses5-dev libncursesw5-dev libtinfo6 \
+            cmake libffi-dev libssl-dev autopoint gettext
 
       - name: Install Rust
         run: |
@@ -56,7 +44,12 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel
           python -m pip install buildozer "cython==0.29.34"
 
+      - name: Create pip constraints
+        run: echo 'charset-normalizer==3.3.2' > pip-constraints.txt
+
       - name: Build debug APK
+        env:
+          PIP_CONSTRAINT: ${{ github.workspace }}/pip-constraints.txt
         run: buildozer android debug
 
       - name: Upload APK
