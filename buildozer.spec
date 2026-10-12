@@ -20,7 +20,7 @@ version = 0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,pyjnius,android,charset-normalizer==3.3.2
+requirements = python3,kivy,pyjnius,android
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
@@ -45,12 +45,9 @@ android.minapi = 24
 android.ndk_api = 24
 
 # (bool) If True, then skip trying to update the Android sdk
-# This can be useful to avoid excess Internet downloads or save time
-# when an update is due and you just want to test/build your package
 android.skip_update = False
 
-# (bool) If True, then automatically accept all SDK license
-# agreements. This is intended for automation only
+# (bool) If True, then automatically accept all SDK license agreements.
 android.accept_sdk_license = True
 
 # (str) The Android arch to build for, choices: armeabi-v7a, arm64-v8a, x86, x86_64
