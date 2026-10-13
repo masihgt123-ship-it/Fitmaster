@@ -27,6 +27,9 @@ orientation = portrait
 # تمام‌صفحه نباشد
 fullscreen = 0
 
+# آیکون برنامه
+icon.filename = icon-192.png
+
 # مجوزهای اندروید
 android.permissions = INTERNET
 
