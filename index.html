@@ -1,21 +1,1029 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FitMaster Pro</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      background: #121b2b;
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0f172a">
+<title>FitMaster Pro</title>
+
+
+<style>
+:root {
+  --blue: #38bdf8;
+  --blue-dark: #0284c7;
+  --gold: #fbbf24;
+  --green: #22c55e;
+  --red: #ef4444;
+  --dark: #07111f;
+  --card: rgba(8, 20, 38, 0.92);
+  --border: rgba(255,255,255,0.16);
+  --muted: #b8c4d4;
+  --white: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Tahoma, Arial, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--white);
+  padding: 12px;
+  background-color: #07111f;
+  background-image:
+    linear-gradient(rgba(2, 8, 18, 0.78), rgba(2, 8, 18, 0.94)),
+    url("gym_bg.webp"),
+    url("image_gen_cb6ad20a-e2b6-4caf-9cd5-2fa7c5bca37e_0.webp");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.app {
+  width: 100%;
+  max-width: 680px;
+  margin: auto;
+  padding-bottom: 30px;
+}
+
+header {
+  text-align: center;
+  padding: 18px 12px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(8, 20, 38, 0.90);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+}
+
+header h1 {
+  color: var(--blue);
+  font-size: 1.8rem;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 15px rgba(56,189,248,0.4);
+}
+
+.author {
+  color: var(--gold);
+  font-size: 0.88rem;
+  font-weight: bold;
+  direction: ltr;
+}
+
+#todayDate {
+  color: var(--muted);
+  margin-top: 7px;
+  font-size: 0.85rem;
+}
+
+.tabs {
+  display: flex;
+  gap: 6px;
+  padding: 5px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(8, 20, 38, 0.90);
+}
+
+.tab-btn {
+  flex: 1;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 4px;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+
+.tab-btn.active {
+  color: #00111e;
+  background: linear-gradient(135deg, var(--blue), #7dd3fc);
+}
+
+.card {
+  padding: 18px;
+  margin-bottom: 14px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--card);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.card-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.card-title::before {
+  content: "";
+  width: 5px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--blue);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.full {
+  grid-column: 1 / -1;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+label {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+input,
+select {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: 11px;
+  padding: 8px 12px;
+  outline: none;
+  color: #ffffff;
+  background: #06152b;
+  font-size: 0.92rem;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px rgba(56,189,248,0.25);
+}
+
+input[readonly] {
+  color: var(--gold);
+  font-weight: bold;
+  direction: ltr;
+  text-align: center;
+}
+
+.date-box {
+  background: rgba(2, 12, 28, 0.7);
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px dashed rgba(56,189,248,0.35);
+}
+
+.date-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.btn {
+  width: 100%;
+  min-height: 48px;
+  border: none;
+  border-radius: 13px;
+  margin-top: 16px;
+  cursor: pointer;
+  font-size: 0.98rem;
+  font-weight: bold;
+}
+
+.btn-primary {
+  color: #02111d;
+  background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+}
+
+.btn-danger {
+  color: var(--red);
+  background: transparent;
+  border: 1px solid var(--red);
+}
+
+.info-box {
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid rgba(251,191,36,0.35);
+  border-radius: 12px;
+  color: #fde68a;
+  background: rgba(251,191,36,0.08);
+  line-height: 1.8;
+  font-size: 0.8rem;
+}
+
+.result-box {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid rgba(56,189,248,0.35);
+  border-radius: 14px;
+  background: rgba(2, 12, 28, 0.9);
+}
+
+.result-title {
+  color: var(--gold);
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 7px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.86rem;
+}
+
+.result-row:last-child {
+  border-bottom: none;
+}
+
+.result-value {
+  color: var(--blue);
+  font-weight: bold;
+}
+
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  margin-top: 14px;
+  border-radius: 14px;
+  background: rgba(1, 8, 20, 0.75);
+  overflow: hidden;
+}
+
+#progressChart {
+  width: 100%;
+  height: 100%;
+}
+
+.table-wrap {
+  max-width: 100%;
+  overflow-x: auto;
+  margin-top: 14px;
+  border-radius: 12px;
+}
+
+table {
+  width: 100%;
+  min-width: 740px;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.76rem;
+}
+
+th, td {
+  padding: 9px 5px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  white-space: nowrap;
+}
+
+th {
+  color: var(--gold);
+  background: #0b1a2e;
+}
+
+td {
+  color: #e2e8f0;
+}
+
+.delete-btn {
+  border: none;
+  color: var(--red);
+  background: transparent;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.empty {
+  padding: 22px;
+  color: var(--muted);
+  text-align: center;
+}
+</style>
 </head>
+
 <body>
-  <h1>FitMaster Pro</h1>
-  <p>برنامه با موفقیت باز شد.</p>
+
+<div class="app">
+
+  <header>
+    <h1>FitMaster Pro</h1>
+    <div class="author">Designed by Dina Nafezi</div>
+    <div id="todayDate">امروز: در حال دریافت...</div>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="entryTabBtn" onclick="showTab('entry')">
+      ثبت اندازه‌گیری
+    </button>
+    <button class="tab-btn" id="historyTabBtn" onclick="showTab('history')">
+      تاریخچه و نمودار
+    </button>
+  </div>
+
+  <!-- فرم ثبت -->
+  <section id="entrySection" class="card">
+    <div class="card-title">ثبت اطلاعات فرد</div>
+
+    <div class="info-box">
+      برای فرد جدید، گزینه «فرد جدید» را انتخاب کنید (کد به‌ترتیب داده می‌شود).<br>
+      برای اندازه‌گیری مجدد فرد قبلی، «فرد قبلی» را انتخاب کنید تا روند پیشرفت او در نمودار متصل شود.
+    </div>
+
+    <form id="measurementForm" onsubmit="saveMeasurement(event)">
+      <div class="form-grid">
+
+        <div class="form-group full">
+          <label>نوع ثبت</label>
+          <select id="personMode" onchange="changePersonMode()">
+            <option value="new">فرد جدید - تخصیص کد جدید خودکار</option>
+            <option value="existing">فرد قبلی - انتخاب از لیست</option>
+          </select>
+        </div>
+
+        <div id="existingPersonBox" class="form-group full hidden">
+          <label>انتخاب فرد از قبل ثبت شده</label>
+          <select id="existingPerson" onchange="loadExistingPerson()"></select>
+        </div>
+
+        <div class="form-group">
+          <label>کد شناسایی</label>
+          <input id="personCode" value="1" readonly>
+        </div>
+
+        <div class="form-group">
+          <label>نام و نام خانوادگی</label>
+          <input id="name" type="text" placeholder="مثلاً محمد حسینی" required>
+        </div>
+
+        <div class="form-group">
+          <label>جنسیت</label>
+          <select id="gender" required>
+            <option value="male">مرد</option>
+            <option value="female">زن</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>سن</label>
+          <input id="age" type="number" min="5" max="110" placeholder="مثلاً ۲۸" required>
+        </div>
+
+        <div class="form-group">
+          <label>قد (cm)</label>
+          <input id="height" type="number" step="0.1" placeholder="مثلاً ۱۷۸" required>
+        </div>
+
+        <div class="form-group">
+          <label>وزن (kg)</label>
+          <input id="weight" type="number" step="0.1" placeholder="مثلاً ۷۴.۵" required>
+        </div>
+
+        <div class="form-group">
+          <label>دور بازو (cm)</label>
+          <input id="arm" type="number" step="0.1" placeholder="cm" required>
+        </div>
+
+        <div class="form-group">
+          <label>دور سینه (cm)</label>
+          <input id="chest" type="number" step="0.1" placeholder="cm" required>
+        </div>
+
+        <div class="form-group">
+          <label>دور کمر (cm)</label>
+          <input id="waist" type="number" step="0.1" placeholder="cm" required>
+        </div>
+
+        <div class="form-group">
+          <label>دور ناف (cm)</label>
+          <input id="navel" type="number" step="0.1" placeholder="cm" required>
+        </div>
+
+        <div class="form-group">
+          <label>دور لگن (cm)</label>
+          <input id="hip" type="number" step="0.1" placeholder="cm" required>
+        </div>
+
+        <div class="form-group">
+          <label>دور باسن (cm)</label>
+          <input id="buttock" type="number" step="0.1" placeholder="cm" required>
+        </div>
+
+        <div class="form-group">
+          <label>دور ران (cm)</label>
+          <input id="thigh" type="number" step="0.1" placeholder="cm" required>
+        </div>
+
+        <div class="form-group">
+          <label>دور ساق (cm)</label>
+          <input id="calf" type="number" step="0.1" placeholder="cm" required>
+        </div>
+
+        <!-- تقویم کشویی شمسی -->
+        <div class="form-group full date-box">
+          <label style="color:var(--gold); font-weight:bold;">تاریخ ثبت اندازه‌گیری (تقویم شمسی)</label>
+          <div class="date-grid">
+            <div>
+              <label>روز:</label>
+              <select id="jalaliDay"></select>
+            </div>
+            <div>
+              <label>ماه:</label>
+              <select id="jalaliMonth" onchange="updateDays()"></select>
+            </div>
+            <div>
+              <label>سال:</label>
+              <select id="jalaliYear" onchange="updateDays()"></select>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary" type="submit">
+        ذخیره اطلاعات و محاسبه شاخص‌ها
+      </button>
+    </form>
+
+    <div id="resultBox" class="result-box hidden">
+      <div class="result-title">اندازه‌گیری با موفقیت ثبت شد ✔</div>
+      <div class="result-row"><span>کد شناسایی:</span><span id="resultCode" class="result-value">-</span></div>
+      <div class="result-row"><span>نام:</span><span id="resultName" class="result-value">-</span></div>
+      <div class="result-row"><span>تاریخ ثبت:</span><span id="resultDate" class="result-value">-</span></div>
+      <div class="result-row"><span>شاخص BMI:</span><span id="resultBMI" class="result-value">-</span></div>
+      <div class="result-row"><span>نسبت کمر به باسن (WHR):</span><span id="resultWHR" class="result-value">-</span></div>
+    </div>
+  </section>
+
+  <!-- تاریخچه و نمودار -->
+  <section id="historySection" class="card hidden">
+    <div class="card-title">نمودار تغییرات و پیشرفت</div>
+
+    <div class="form-group">
+      <label>انتخاب فرد</label>
+      <select id="chartPerson" onchange="renderHistory()"></select>
+    </div>
+
+    <div class="form-group" style="margin-top:10px;">
+      <label>شاخص نمودار</label>
+      <select id="chartMetric" onchange="drawChart()">
+        <option value="weight">وزن (kg)</option>
+        <option value="arm">دور بازو (cm)</option>
+        <option value="chest">دور سینه (cm)</option>
+        <option value="waist">دور کمر (cm)</option>
+        <option value="navel">دور ناف (cm)</option>
+        <option value="hip">دور لگن (cm)</option>
+        <option value="buttock">دور باسن (cm)</option>
+        <option value="thigh">دور ران (cm)</option>
+        <option value="calf">دور ساق (cm)</option>
+        <option value="bmi">شاخص BMI</option>
+      </select>
+    </div>
+
+    <div class="chart-wrapper">
+      <canvas id="progressChart"></canvas>
+    </div>
+
+    <div class="card-title" style="margin-top:22px;">جدول سوابق ثبت‌شده</div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>کد</th>
+            <th>تاریخ</th>
+            <th>نام</th>
+            <th>وزن</th>
+            <th>بازو</th>
+            <th>سینه</th>
+            <th>کمر</th>
+            <th>ناف</th>
+            <th>لگن</th>
+            <th>باسن</th>
+            <th>ران</th>
+            <th>ساق</th>
+            <th>BMI</th>
+            <th>حذف</th>
+          </tr>
+        </thead>
+        <tbody id="recordsBody"></tbody>
+      </table>
+    </div>
+
+    <button class="btn btn-danger" onclick="clearAllData()">
+      پاکسازی کل داده‌ها
+    </button>
+  </section>
+
+</div>
+
+<script>
+// الگوریتم استاندارد تبدیل میلادی به شمسی بدون نیاز به Intl
+function gregorianToJalali(gy, gm, gd) {
+  const g_d_m = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+  let jy = (gy <= 1600) ? 0 : 979;
+  gy -= (gy <= 1600) ? 621 : 1600;
+  const gy2 = (gm > 2) ? (gy + 1) : gy;
+  let days = (365 * gy) + parseInt((gy2 + 3) / 4) - parseInt((gy2 + 99) / 100) + parseInt((gy2 + 399) / 400) - 80 + gd + g_d_m[gm - 1];
+  jy += 33 * parseInt(days / 12053);
+  days %= 12053;
+  jy += 4 * parseInt(days / 1461);
+  days %= 1461;
+  jy += parseInt((days - 1) / 365);
+  if (days > 365) days = (days - 1) % 365;
+  let jm, jd;
+  if (days < 186) {
+    jm = 1 + parseInt(days / 31);
+    jd = 1 + (days % 31);
+  } else {
+    jm = 7 + parseInt((days - 186) / 30);
+    jd = 1 + ((days - 186) % 30);
+  }
+  return { y: jy, m: jm, d: jd };
+}
+
+const monthNames = [
+  "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
+  "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
+];
+
+function getJalaliDaysCount(y, m) {
+  if (m <= 6) return 31;
+  if (m <= 11) return 30;
+  // سال کبیسه
+  const mod = y % 33;
+  const leaps = [1, 5, 9, 13, 17, 22, 26, 30];
+  return leaps.includes(mod) ? 30 : 29;
+}
+
+function initCalendar() {
+  const now = new Date();
+  const today = gregorianToJalali(now.getFullYear(), now.getMonth() + 1, now.getDate());
+
+  const ySel = document.getElementById("jalaliYear");
+  const mSel = document.getElementById("jalaliMonth");
+
+  ySel.innerHTML = "";
+  mSel.innerHTML = "";
+
+  // از ۵ سال قبل تا ۳ سال بعد
+  for (let y = today.y - 5; y <= today.y + 3; y++) {
+    const opt = document.createElement("option");
+    opt.value = y;
+    opt.textContent = y;
+    ySel.appendChild(opt);
+  }
+  ySel.value = today.y;
+
+  monthNames.forEach((name, idx) => {
+    const opt = document.createElement("option");
+    opt.value = idx + 1;
+    opt.textContent = name;
+    mSel.appendChild(opt);
+  });
+  mSel.value = today.m;
+
+  updateDays(today.d);
+
+  document.getElementById("todayDate").textContent = `امروز: ${today.y}/${String(today.m).padStart(2,'0')}/${String(today.d).padStart(2,'0')}`;
+}
+
+function updateDays(targetDay) {
+  const dSel = document.getElementById("jalaliDay");
+  const y = parseInt(document.getElementById("jalaliYear").value, 10);
+  const m = parseInt(document.getElementById("jalaliMonth").value, 10);
+
+  const prev = targetDay || parseInt(dSel.value, 10) || 1;
+  const total = getJalaliDaysCount(y, m);
+
+  dSel.innerHTML = "";
+  for (let d = 1; d <= total; d++) {
+    const opt = document.createElement("option");
+    opt.value = d;
+    opt.textContent = d;
+    dSel.appendChild(opt);
+  }
+  dSel.value = Math.min(prev, total);
+}
+
+function getPickedDate() {
+  const y = document.getElementById("jalaliYear").value;
+  const m = String(document.getElementById("jalaliMonth").value).padStart(2, '0');
+  const d = String(document.getElementById("jalaliDay").value).padStart(2, '0');
+  return {
+    key: `${y}-${m}-${d}`,
+    text: `${y}/${m}/${d}`
+  };
+}
+
+// دیتابیس لوکال
+const RECORDS_KEY = "fitmaster_records_v6";
+const PEOPLE_KEY = "fitmaster_people_v6";
+const NEXT_ID_KEY = "fitmaster_next_id_v6";
+
+let records = [];
+let people = [];
+let nextPersonId = 1;
+
+function loadLocalData() {
+  try {
+    records = JSON.parse(localStorage.getItem(RECORDS_KEY)) || [];
+    people = JSON.parse(localStorage.getItem(PEOPLE_KEY)) || [];
+    nextPersonId = Number(localStorage.getItem(NEXT_ID_KEY)) || 1;
+  } catch(e) {
+    records = []; people = []; nextPersonId = 1;
+  }
+}
+
+function saveLocalData() {
+  localStorage.setItem(RECORDS_KEY, JSON.stringify(records));
+  localStorage.setItem(PEOPLE_KEY, JSON.stringify(people));
+  localStorage.setItem(NEXT_ID_KEY, String(nextPersonId));
+}
+
+function syncPeopleUI() {
+  const ex = document.getElementById("existingPerson");
+  const ch = document.getElementById("chartPerson");
+
+  ex.innerHTML = "";
+  ch.innerHTML = '<option value="all">همه افراد</option>';
+
+  if (people.length === 0) {
+    ex.innerHTML = '<option value="">(هنوز کسی ثبت نشده)</option>';
+  }
+
+  people.forEach(p => {
+    const opt1 = document.createElement("option");
+    opt1.value = p.id;
+    opt1.textContent = `کد ${p.id} - ${p.name}`;
+    ex.appendChild(opt1);
+
+    const opt2 = document.createElement("option");
+    opt2.value = p.id;
+    opt2.textContent = `کد ${p.id} - ${p.name}`;
+    ch.appendChild(opt2);
+  });
+}
+
+function changePersonMode() {
+  const mode = document.getElementById("personMode").value;
+  const box = document.getElementById("existingPersonBox");
+  const nameInp = document.getElementById("name");
+
+  if (mode === "existing") {
+    box.classList.remove("hidden");
+    nameInp.readOnly = true;
+    loadExistingPerson();
+  } else {
+    box.classList.add("hidden");
+    nameInp.readOnly = false;
+    nameInp.value = "";
+    document.getElementById("personCode").value = nextPersonId;
+  }
+}
+
+function loadExistingPerson() {
+  const id = Number(document.getElementById("existingPerson").value);
+  const found = people.find(p => p.id === id);
+  if (found) {
+    document.getElementById("personCode").value = found.id;
+    document.getElementById("name").value = found.name;
+    document.getElementById("gender").value = found.gender;
+  }
+}
+
+function val(id) {
+  return parseFloat(document.getElementById(id).value) || 0;
+}
+
+function saveMeasurement(e) {
+  e.preventDefault();
+
+  const mode = document.getElementById("personMode").value;
+  const name = document.getElementById("name").value.trim();
+  const gender = document.getElementById("gender").value;
+
+  if (!name) {
+    alert("لطفاً نام فرد را وارد کنید.");
+    return;
+  }
+
+  let personId;
+  if (mode === "new") {
+    personId = nextPersonId;
+    people.push({ id: personId, name, gender });
+    nextPersonId++;
+  } else {
+    personId = Number(document.getElementById("existingPerson").value);
+    if (!personId) {
+      alert("لطفاً یک فرد را انتخاب کنید.");
+      return;
+    }
+  }
+
+  const h = val("height");
+  const w = val("weight");
+  const waist = val("waist");
+  const buttock = val("buttock");
+
+  const hm = h / 100;
+  const bmi = hm > 0 ? Number((w / (hm * hm)).toFixed(1)) : 0;
+  const whr = buttock > 0 ? Number((waist / buttock).toFixed(2)) : 0;
+
+  const dateObj = getPickedDate();
+
+  const item = {
+    recordId: Date.now(),
+    personId,
+    name,
+    gender,
+    age: val("age"),
+    height: h,
+    weight: w,
+    arm: val("arm"),
+    chest: val("chest"),
+    waist,
+    navel: val("navel"),
+    hip: val("hip"),
+    buttock,
+    thigh: val("thigh"),
+    calf: val("calf"),
+    bmi,
+    whr,
+    dateKey: dateObj.key,
+    dateText: dateObj.text
+  };
+
+  records.push(item);
+  saveLocalData();
+  syncPeopleUI();
+
+  document.getElementById("personCode").value = nextPersonId;
+
+  document.getElementById("resultCode").textContent = personId;
+  document.getElementById("resultName").textContent = name;
+  document.getElementById("resultDate").textContent = dateObj.text;
+  document.getElementById("resultBMI").textContent = bmi;
+  document.getElementById("resultWHR").textContent = whr;
+  document.getElementById("resultBox").classList.remove("hidden");
+
+  renderHistory();
+  alert(`اطلاعات برای «${name}» (کد ${personId}) در تاریخ ${dateObj.text} با موفقیت ثبت شد.`);
+}
+
+function showTab(t) {
+  const entry = document.getElementById("entrySection");
+  const hist = document.getElementById("historySection");
+  const eBtn = document.getElementById("entryTabBtn");
+  const hBtn = document.getElementById("historyTabBtn");
+
+  if (t === "entry") {
+    entry.classList.remove("hidden");
+    hist.classList.add("hidden");
+    eBtn.classList.add("active");
+    hBtn.classList.remove("active");
+  } else {
+    entry.classList.add("hidden");
+    hist.classList.remove("hidden");
+    eBtn.classList.remove("active");
+    hBtn.classList.add("active");
+    renderHistory();
+  }
+}
+
+function renderHistory() {
+  const tbody = document.getElementById("recordsBody");
+  const targetId = document.getElementById("chartPerson").value;
+
+  let list = [...records];
+  if (targetId !== "all") {
+    list = list.filter(r => String(r.personId) === String(targetId));
+  }
+
+  // جدیدترین‌ها اول نمایش داده شوند
+  list.sort((a, b) => b.dateKey.localeCompare(a.dateKey) || b.recordId - a.recordId);
+
+  tbody.innerHTML = "";
+  if (list.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="14" class="empty">هنوز هیچ اندازه‌گیری ثبت نشده است.</td></tr>';
+  } else {
+    list.forEach(r => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td style="color:var(--gold);font-weight:bold;">${r.personId}</td>
+        <td>${r.dateText}</td>
+        <td>${r.name}</td>
+        <td>${r.weight}</td>
+        <td>${r.arm}</td>
+        <td>${r.chest}</td>
+        <td>${r.waist}</td>
+        <td>${r.navel}</td>
+        <td>${r.hip}</td>
+        <td>${r.buttock}</td>
+        <td>${r.thigh}</td>
+        <td>${r.calf}</td>
+        <td>${r.bmi}</td>
+        <td><button class="delete-btn" onclick="deleteRec(${r.recordId})">✕</button></td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  drawChart();
+}
+
+function deleteRec(id) {
+  if (confirm("این سطر حذف شود؟")) {
+    records = records.filter(r => r.recordId !== id);
+    saveLocalData();
+    renderHistory();
+  }
+}
+
+const metricMap = {
+  weight: "وزن (kg)",
+  arm: "دور بازو (cm)",
+  chest: "دور سینه (cm)",
+  waist: "دور کمر (cm)",
+  navel: "دور ناف (cm)",
+  hip: "دور لگن (cm)",
+  buttock: "دور باسن (cm)",
+  thigh: "دور ران (cm)",
+  calf: "دور ساق (cm)",
+  bmi: "شاخص BMI"
+};
+
+function drawChart() {
+  const canvas = document.getElementById("progressChart");
+  const wrapper = canvas.parentElement;
+  const ctx = canvas.getContext("2d");
+
+  const w = wrapper.clientWidth;
+  const h = wrapper.clientHeight;
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + "px";
+  canvas.style.height = h + "px";
+
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+
+  const targetId = document.getElementById("chartPerson").value;
+  let items = [...records];
+  if (targetId !== "all") {
+    items = items.filter(r => String(r.personId) === String(targetId));
+  }
+
+  // مرتب‌سازی صعودی زمانی برای نمودار
+  items.sort((a, b) => a.dateKey.localeCompare(b.dateKey) || a.recordId - b.recordId);
+
+  const metric = document.getElementById("chartMetric").value;
+  const pts = items.map(r => ({ val: Number(r[metric]), date: r.dateText }));
+
+  if (pts.length === 0) {
+    ctx.fillStyle = "#b8c4d4";
+    ctx.font = "14px Tahoma";
+    ctx.textAlign = "center";
+    ctx.fillText("داده‌ای برای رسم نمودار وجود ندارد", w / 2, h / 2);
+    return;
+  }
+
+  const pT = 35, pB = 45, pL = 45, pR = 35;
+  const plotW = w - pL - pR;
+  const plotH = h - pT - pB;
+
+  let min = Math.min(...pts.map(p => p.val));
+  let max = Math.max(...pts.map(p => p.val));
+
+  if (min === max) { min -= 1; max += 1; }
+  else { const pad = (max - min) * 0.15; min -= pad; max += pad; }
+
+  const getX = (i) => pts.length === 1 ? (pL + plotW / 2) : (pL + (i / (pts.length - 1)) * plotW);
+  const getY = (val) => pT + ((max - val) / (max - min)) * plotH;
+
+  // عنوان شاخص
+  ctx.fillStyle = "#fbbf24";
+  ctx.font = "bold 13px Tahoma";
+  ctx.textAlign = "right";
+  ctx.fillText(`روند ${metricMap[metric]} بر اساس تاریخ`, w - 15, 20);
+
+  // گرید افقی
+  ctx.strokeStyle = "rgba(255,255,255,0.08)";
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pT + (i / 4) * plotH;
+    ctx.beginPath();
+    ctx.moveTo(pL, y);
+    ctx.lineTo(w - pR, y);
+    ctx.stroke();
+
+    const valNum = max - (i / 4) * (max - min);
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "10px Tahoma";
+    ctx.textAlign = "right";
+    ctx.fillText(valNum.toFixed(1), pL - 6, y + 4);
+  }
+
+  // خط اتصال
+  ctx.beginPath();
+  pts.forEach((p, i) => {
+    const x = getX(i), y = getY(p.val);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+  ctx.strokeStyle = "#38bdf8";
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  // نقطه‌ها و تاریخ‌ها
+  pts.forEach((p, i) => {
+    const x = getX(i), y = getY(p.val);
+
+    ctx.beginPath();
+    ctx.arc(x, y, 5, 0, Math.PI * 2);
+    ctx.fillStyle = "#fbbf24";
+    ctx.fill();
+    ctx.strokeStyle = "#07111f";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+
+    ctx.fillStyle = "#f8fafc";
+    ctx.font = "bold 10px Tahoma";
+    ctx.textAlign = "center";
+    ctx.fillText(p.val.toFixed(1), x, y - 9);
+
+    ctx.save();
+    ctx.translate(x, h - 10);
+    ctx.rotate(-Math.PI / 5);
+    ctx.fillStyle = "#94a3b8";
+    ctx.font = "9px Tahoma";
+    ctx.fillText(p.date, 0, 0);
+    ctx.restore();
+  });
+}
+
+function clearAllData() {
+  if (confirm("آیا مایلید تمام سوابق و لیست افراد به کل پاک شود؟")) {
+    records = [];
+    people = [];
+    nextPersonId = 1;
+    saveLocalData();
+    syncPeopleUI();
+    document.getElementById("personCode").value = 1;
+    document.getElementById("resultBox").classList.add("hidden");
+    document.getElementById("measurementForm").reset();
+    initCalendar();
+    renderHistory();
+  }
+}
+
+// لود اولیه در هنگام بالا آمدن صفحه
+window.addEventListener("DOMContentLoaded", () => {
+  loadLocalData();
+  initCalendar();
+  syncPeopleUI();
+  document.getElementById("personCode").value = nextPersonId;
+  document.getElementById("chartPerson").value = "all";
+  renderHistory();
+});
+
+window.addEventListener("resize", drawChart);
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(function() { console.log('Service Worker Registered'); });
+  }
+</script>
+
 </body>
 </html>
