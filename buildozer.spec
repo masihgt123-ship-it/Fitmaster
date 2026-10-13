@@ -21,42 +21,33 @@ version = 0.1
 # نیازمندی‌های برنامه
 requirements = python3,kivy,pyjnius,android
 
-# جهت صفحه
+# جهت صفحه (عمودی)
 orientation = portrait
 
 # تمام‌صفحه نباشد
 fullscreen = 0
 
-# آیکون برنامه
-icon.filename = icon-192.png
-
-# تصویر صفحهٔ بارگذاری
-presplash.filename = icon-512.png
-
 # مجوزهای اندروید
 android.permissions = INTERNET
 
-# نسخهٔ هدف اندروید
+# نسخهٔ هدف و تنظیمات بیلد اندروید
 android.api = 34
-
-# کمترین نسخهٔ اندروید پشتیبانی‌شده
 android.minapi = 24
-
-# نسخهٔ API برای NDK
-android.ndk_api = 24
-
-# تنظیم SDK اندروید
-android.skip_update = False
+android.ndk = 25b
+android.archs = arm64-v8a, armeabi-v7a
 android.accept_sdk_license = True
 
-# معماری خروجی APK
-android.archs = arm64-v8a
+# آیکون روی صفحه اصلی گوشی
+icon.filename = %(source.dir)s/icon-192.png
 
+# تصویر صفحهٔ بارگذاری ابتدایی (مرحله ۲)
+presplash.filename = %(source.dir)s/icon-512.png
+
+# رنگ پس‌زمینهٔ صفحه بارگذاری (دقیقاً رنگ زمینه تیره فیت‌مستر تا پرش رنگی نداشته باشی)
+android.presplash_color = #07111f
+
+p4a.branch = v2024.01.21
 
 [buildozer]
-
-# سطح نمایش گزارش‌های ساخت
 log_level = 2
-
-# نمایش هشدار در صورت اجرای Buildozer با دسترسی ریشه
-warn_on_root = 1
+warn_on_root = 0
