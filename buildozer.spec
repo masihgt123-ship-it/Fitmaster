@@ -30,6 +30,9 @@ fullscreen = 0
 # آیکون برنامه
 icon.filename = icon-192.png
 
+# تصویر صفحهٔ بارگذاری
+presplash.filename = icon-512.png
+
 # مجوزهای اندروید
 android.permissions = INTERNET
 
